@@ -9,7 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MessageRepository extends MongoRepository<Message, String> {
 
-    Optional<List<Message>> findAllByChatId(String chatId);
-
-    List<Message> findDistinctByChatId();
+  Optional<List<Message>> findAllByChatId(String chatId);
 }

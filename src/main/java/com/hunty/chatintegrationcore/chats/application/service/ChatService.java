@@ -34,6 +34,6 @@ public class ChatService implements ChatUseCase {
 
   @Override
   public List<String> getAllMessages() {
-    return null;
+    return messagePort.getAllMessages();
   }
 }

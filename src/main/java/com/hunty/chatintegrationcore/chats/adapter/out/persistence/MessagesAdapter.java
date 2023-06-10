@@ -23,6 +23,11 @@ public class MessagesAdapter implements MessagePort {
 
   @Override
   public List<String> getAllChats() {
-    return messageRepository.findDistinctByChatId().stream().map(Message::getChatId).toList();
+    return messageRepository.findAll().stream().map(Message::getChatId).toList();
+  }
+
+  @Override
+  public List<String> getAllMessages() {
+    return null;
   }
 }

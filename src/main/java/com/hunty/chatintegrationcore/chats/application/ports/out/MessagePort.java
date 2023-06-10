@@ -8,4 +8,6 @@ public interface MessagePort {
 
     List<String> getAllChats();
 
+    List<String> getAllMessages();
+
 }
