@@ -8,11 +8,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("Message")
 @Data
 @Builder
-public class Message {
+public class MessageModel {
 
     @Id
     private String id;
     private String chatId;
     private String message;
+    private Long date;
 
 }

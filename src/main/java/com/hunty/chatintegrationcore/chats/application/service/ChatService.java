@@ -3,6 +3,7 @@ package com.hunty.chatintegrationcore.chats.application.service;
 import com.hunty.chatintegrationcore.chats.application.ports.in.ChatUseCase;
 import com.hunty.chatintegrationcore.chats.application.ports.out.ChatPort;
 import com.hunty.chatintegrationcore.chats.application.ports.out.MessagePort;
+import com.hunty.chatintegrationcore.chats.domain.Message;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,19 +22,19 @@ public class ChatService implements ChatUseCase {
   }
 
   @Override
-  public boolean sendMessage(String chatId, String message) {
+  public boolean sendMessage(Message message) {
     try {
-      chatPort.sendMessage(chatId, message);
-      messagePort.saveMessage(chatId, message);
+      chatPort.sendMessage(message.chatId(), message.message());
+      messagePort.saveMessage(message);
       return true;
     } catch (Exception e) {
-      log.error("cannot send message to {} ", chatId, e);
+      log.error("cannot send message to {} ", message.chatId(), e);
       return false;
     }
   }
 
   @Override
-  public List<String> getAllMessages() {
-    return messagePort.getAllMessages();
+  public List<String> getAllMessages(String chatId) {
+    return messagePort.getAllMessages(chatId);
   }
 }

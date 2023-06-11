@@ -1,5 +1,6 @@
 package com.hunty.chatintegrationcore.chats.application.ports.in;
 
+import com.hunty.chatintegrationcore.chats.domain.Message;
 import java.util.List;
 
 public interface ChatUseCase {
@@ -7,8 +8,8 @@ public interface ChatUseCase {
 
     List<String> getAllChats();
 
-    boolean sendMessage(String chatId, String message);
+    boolean sendMessage(Message message);
 
-    List<String> getAllMessages();
+    List<String> getAllMessages(String chatId);
 
 }

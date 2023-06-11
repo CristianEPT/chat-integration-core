@@ -8,7 +8,7 @@ telegram:
 spring:
   data:
     mongodb:
-      uri: mongodb://root:password@localhost:27017/?authMechanism=DEFAULT
+      uri: mongodb://root:password@localhost:27017/HuntyDb?authSource=admin
 logging:
   level:
     org:
