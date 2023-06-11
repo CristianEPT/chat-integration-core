@@ -5,6 +5,7 @@ import com.hunty.chatintegrationcore.chats.domain.Message;
 import java.time.Instant;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -36,11 +37,16 @@ public class HuntyBot extends TelegramLongPollingBot {
 
   @Override
   public void onUpdateReceived(Update update) {
-    var chatId = update.getMessage().getChatId();
-    var text = update.getMessage().getText();
-    log.info("received --> chatID {}, text {}", chatId, text);
-    var message = new Message(chatId.toString(), text, Instant.now().toEpochMilli());
-    messagePort.saveMessage(message);
+    if (!StringUtils.isEmpty(update.getMessage().getText())) {
+      var chatId = update.getMessage().getChatId();
+      var text =
+          String.format(
+              "%s dice %s",
+              update.getMessage().getFrom().getFirstName(), update.getMessage().getText());
+      log.info("received --> chatID {}, text {}", chatId, text);
+      var message = new Message(chatId.toString(), text, Instant.now().toEpochMilli());
+      messagePort.saveMessage(message);
+    }
   }
 
   @Override
