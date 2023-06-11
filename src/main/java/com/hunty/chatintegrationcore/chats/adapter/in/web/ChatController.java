@@ -2,6 +2,7 @@ package com.hunty.chatintegrationcore.chats.adapter.in.web;
 
 import com.hunty.chatintegrationcore.chats.application.ports.in.ChatUseCase;
 import com.hunty.chatintegrationcore.chats.domain.Message;
+import java.time.Instant;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,25 +13,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("messages")
+@RequestMapping("chats")
 @RequiredArgsConstructor
 public class ChatController {
 
   private final ChatUseCase chatUseCase;
 
-  @GetMapping("/chats")
+  @GetMapping
   public List<String> getChats() {
     return chatUseCase.getAllChats();
   }
 
-  @PostMapping
+  @PostMapping("/message")
   public boolean sendMessage(
       @RequestHeader("ChatId") String chatId, @RequestBody MessageRequest messageRequest) {
-    var message = new Message(chatId, messageRequest.message(), messageRequest.date());
+    var message = new Message(chatId, messageRequest.message(), Instant.now().toEpochMilli());
     return chatUseCase.sendMessage(message);
   }
 
-  @GetMapping
+  @GetMapping("/message")
   public List<String> getAllMessages(@RequestHeader("ChatId") String chatId) {
     return chatUseCase.getAllMessages(chatId);
   }

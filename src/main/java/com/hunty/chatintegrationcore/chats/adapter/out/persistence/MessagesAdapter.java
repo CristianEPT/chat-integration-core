@@ -45,7 +45,11 @@ public class MessagesAdapter implements MessagePort {
   public List<String> getAllMessages(String chatId) {
     Optional<List<MessageModel>> optionalMessages = messageRepository.findAllByChatId(chatId);
     return optionalMessages
-        .map(messages -> messages.stream().map(MessageModel::getMessage).toList())
+        .map(messages -> messages.stream().map(this::buildFormatMethod).toList())
         .orElseGet(ArrayList::new);
+  }
+
+  private String buildFormatMethod(MessageModel messageModel) {
+    return String.format("%s a las %s", messageModel.getMessage(), messageModel.getDate());
   }
 }
