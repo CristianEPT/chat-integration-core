@@ -27,12 +27,14 @@ public class ChatController {
   @PostMapping("/message")
   public boolean sendMessage(
       @RequestHeader("ChatId") String chatId, @RequestBody MessageRequest messageRequest) {
+
     var message = new Message(chatId, messageRequest.message(), Instant.now().toEpochMilli());
     return chatUseCase.sendMessage(message);
   }
 
   @GetMapping("/message")
   public List<String> getAllMessages(@RequestHeader("ChatId") String chatId) {
+
     return chatUseCase.getAllMessages(chatId);
   }
 }
