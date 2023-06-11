@@ -31,6 +31,11 @@ public class ChatController {
     return chatUseCase.sendMessage(message);
   }
 
+  @PostMapping("/document")
+  public boolean sendDocument(@RequestHeader("ChatId") String chatId) {
+    return chatUseCase.sendMessageWithDocument(chatId);
+  }
+
   @GetMapping("/message")
   public List<String> getAllMessages(@RequestHeader("ChatId") String chatId) {
 

@@ -24,7 +24,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(controllers = ChatController.class, properties = "spring.cloud.config.enabled=false")
 class ChatControllerTest {
 
-  private static String BASE_URL = "/chats";
+  private static final String BASE_URL = "/chats";
 
   @Autowired MockMvc mockMvc;
 
@@ -73,5 +73,20 @@ class ChatControllerTest {
         .andExpect(status().isOk());
 
     then(chatUseCase).should(times(1)).getAllMessages("001");
+  }
+
+  @Test
+  void sendDocument() throws Exception {
+
+    when(chatUseCase.sendMessageWithDocument("001")).thenReturn(true);
+
+    mockMvc
+        .perform(
+            post(BASE_URL + "/document")
+                .header("ChatId", "001")
+                .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk());
+
+    then(chatUseCase).should(times(1)).sendMessageWithDocument("001");
   }
 }

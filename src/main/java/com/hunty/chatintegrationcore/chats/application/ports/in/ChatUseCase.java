@@ -5,11 +5,11 @@ import java.util.List;
 
 public interface ChatUseCase {
 
+  List<String> getAllChats();
 
-    List<String> getAllChats();
+  boolean sendMessage(Message message);
 
-    boolean sendMessage(Message message);
+  boolean sendMessageWithDocument(String chatId);
 
-    List<String> getAllMessages(String chatId);
-
+  List<String> getAllMessages(String chatId);
 }

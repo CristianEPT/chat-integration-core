@@ -78,6 +78,25 @@ paths:
             application/json:
               schema:
                 type: boolean
+  /document:
+    post:
+      tags:
+        - chats
+      summary: send default document
+      parameters:
+        - in: header
+          name: ChatId
+          required: true
+          schema:
+            type: string
+            example: 1234
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: boolean
 
 components:
   schemas:

@@ -73,8 +73,9 @@ Nota: Todos los mensajes que se envíen desde el chat hacia el bot
 quedaran almacenados en base de datos.
 
 ### 6. Probar API's
-* Se desarrollaron 3 endpoint
+* Se desarrollaron 4 endpoint
     * Primero: consultar todos los chats
     * Segundo: consultar los mensajes por cada chat
     * Tercero: enviar mensajes al chat
+    * Cuarto: enviar documentos
 * Se desarrollo un swagger para ver la documentación de las API's. [Click Aqui](./swagger.yml)
